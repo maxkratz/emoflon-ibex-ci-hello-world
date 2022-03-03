@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Run build script
         run: |
-          bash ./build.sh -m user -o windows
+          bash ./ci.sh
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()

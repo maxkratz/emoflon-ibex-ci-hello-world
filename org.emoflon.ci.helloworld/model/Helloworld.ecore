@@ -6,6 +6,14 @@
     <details key="documentation" value="TODO: Add documentation for helloworld. Hint: You may copy this element in the Ecore editor to add documentation to EClasses, EOperations, ..."/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="World">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="counter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="counter" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="countries" upperBound="-1"
+        eType="#//Country"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Country">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="population" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -13,7 +13,7 @@ import helloworld.World;
  * This class tests the generated code of the class World (defined within the
  * metamodel).
  */
-public class WorldModelTests {
+public class WorldModelTest {
 
 	@Test
 	public void testHelloworldFactoryInstanceNotNull() {

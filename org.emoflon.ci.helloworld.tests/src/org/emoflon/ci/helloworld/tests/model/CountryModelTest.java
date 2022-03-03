@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import helloworld.Country;
 import helloworld.HelloworldFactory;
 
-public class CountryModelTests {
+public class CountryModelTest {
 
 	@Test
 	public void testHelloworldFactoryInstanceNotNull() {

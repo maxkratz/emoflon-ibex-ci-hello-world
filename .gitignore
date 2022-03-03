@@ -9,3 +9,7 @@
 
 */jars/*.jar
 */debug/*.xmi
+
+org.emoflon.ci.helloworld.tests/build/
+
+org.emoflon.ci.helloworld.tests/report.html

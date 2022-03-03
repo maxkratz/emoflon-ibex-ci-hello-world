@@ -1,0 +1,33 @@
+name: Build Eclipse eMoflon
+on:
+  push:
+    # Run pipeline for commits on branch 'main' and on 'feature/<stuff>'
+    branches:
+      - main
+      - 'feature/**'
+    # Run pipeline for release tags
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  # hello world CI example
+  build:
+    runs-on: [ubuntu-20.04]
+    steps:
+      - name: Start message
+        run: echo "Started CI build."
+      - name: Install correct Java version
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '16'
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Run build script
+        run: |
+          bash ./build.sh -m user -o windows
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: org.emoflon.ci.helloworld.tests/build/reports/*.xml

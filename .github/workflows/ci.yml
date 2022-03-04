@@ -10,7 +10,8 @@ on:
       - 'v*.*.*'
 
 env:
-  ECLIPSE_ARCHIVE: eclipse-emoflon-linux-user-ci
+  #ECLIPSE_ARCHIVE: eclipse-emoflon-linux-user-ci
+  #ECLIPSE_REPO: maxkratz/emoflon-eclipse-build
   TEST_PROJECT: org.emoflon.ci.helloworld.tests
   JAR_NAME: helloworld-testrunner
 
@@ -26,15 +27,49 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '16'
+      - name: Install dependencies
+        run: sudo apt-get install -yq grep coreutils wget curl
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Get Eclipse archive
-        run: curl -s https://api.github.com/repos/maxkratz/emoflon-eclipse-build/releases/latest \
-          | grep "$ECLIPSE_ARCHIVE.*zip" \
-          | cut -d : -f 2,3 \
-          | tr -d \" \
-          | wget -qi -
-
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          repo: maxkratz/emoflon-eclipse-build
+          version: "latest"
+          file: eclipse-emoflon-linux-user-ci.zip
+          target: eclipse-emoflon-linux-user-ci.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Unzip Eclipse from archive
+        run: unzip -qq -o eclipse-emoflon-linux-user-ci.zip
+      # Import projects into Eclipse workspace        
+      - name: Setup Eclipse workspace
+        run: |
+          export START_PWD=$PWD
+          mkdir -p ./ws
+          cd eclipse
+          ./eclipse -noSplash -consoleLog -data $START_PWD/ws -application com.seeq.eclipse.importprojects.headlessimport -importProject $START_PWD
+      # Build twice
+      - name: Build projects in Eclipse
+        run: |
+          export START_PWD=$PWD
+          cd eclipse
+          xvfb-run --auto-servernum --server-args="-ac" ./eclipse -noSplash -consoleLog -data $START_PWD/ws -application org.eclipse.jdt.apt.core.aptBuild
+          xvfb-run --auto-servernum --server-args="-ac" ./eclipse -noSplash -consoleLog -data $START_PWD/ws -application org.eclipse.jdt.apt.core.aptBuild
+      - name: Export ANT XML file
+        run: |
+          export START_PWD=$PWD
+          cd eclipse
+          xvfb-run --auto-servernum --server-args="-ac" ./eclipse -noSplash -consoleLog -application org.emoflon.jar.build.JarAntBuilderApp -project $TEST_PROJECT -data $START_PWD/ws -antPath $JAR_NAME.xml -jarPath $JAR_NAME.jar -launchPath GlobalTestRunner.launch
+      - name: Export JAR file using ANT
+        run: |
+          export START_PWD=$PWD
+          cd $START_PWD/$TEST_PROJECT/
+          ant -f $JAR_NAME.xml
+      - name: Run tests
+        run: |
+          export START_PWD=$PWD
+          cd $START_PWD/$TEST_PROJECT/
+          java -jar $JAR_NAME.jar "$PWD/$JAR_NAME.jar"
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()

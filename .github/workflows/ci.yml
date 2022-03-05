@@ -10,8 +10,9 @@ on:
       - 'v*.*.*'
 
 env:
-  #ECLIPSE_ARCHIVE: eclipse-emoflon-linux-user-ci
-  #ECLIPSE_REPO: maxkratz/emoflon-eclipse-build
+  ECLIPSE_ARCHIVE: eclipse-emoflon-linux-user-ci
+  ECLIPSE_REPO: maxkratz/emoflon-eclipse-build
+  ECLIPSE_TAG: latest
   TEST_PROJECT: org.emoflon.ci.helloworld.tests
   JAR_NAME: helloworld-testrunner
 
@@ -34,13 +35,13 @@ jobs:
       - name: Get Eclipse archive
         uses: dsaltares/fetch-gh-release-asset@master
         with:
-          repo: maxkratz/emoflon-eclipse-build
-          version: "latest"
-          file: eclipse-emoflon-linux-user-ci.zip
-          target: eclipse-emoflon-linux-user-ci.zip
+          repo: ${{ env.ECLIPSE_REPO }}
+          version: ${{ env.ECLIPSE_TAG }}
+          file: ${{ env.ECLIPSE_ARCHIVE }}.zip
+          target: ${{ env.ECLIPSE_ARCHIVE }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Unzip Eclipse from archive
-        run: unzip -qq -o eclipse-emoflon-linux-user-ci.zip
+        run: unzip -qq -o $ECLIPSE_ARCHIVE.zip
       # Import projects into Eclipse workspace        
       - name: Setup Eclipse workspace
         run: |
@@ -74,4 +75,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: org.emoflon.ci.helloworld.tests/build/reports/*.xml
+          files: ${{ env.TEST_PROJECT }}/build/reports/*.xml

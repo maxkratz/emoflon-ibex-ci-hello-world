@@ -16,9 +16,9 @@ env:
   TEST_PROJECT: org.emoflon.ci.helloworld.tests
   JAR_NAME: helloworld-testrunner
 
+# hello world CI example
 jobs:
-  # hello world CI example
-  build:
+  setup:
     runs-on: [ubuntu-20.04]
     steps:
       - name: Start message
@@ -42,6 +42,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Unzip Eclipse from archive
         run: unzip -qq -o $ECLIPSE_ARCHIVE.zip
+
+  build:
+    needs: setup
+    runs-on: [ubuntu-20.04]
+    steps:
       # Import projects into Eclipse workspace        
       - name: Setup Eclipse workspace
         run: |
@@ -66,6 +71,11 @@ jobs:
           export START_PWD=$PWD
           cd $START_PWD/$TEST_PROJECT/
           ant -f $JAR_NAME.xml
+
+  test:
+    needs: build
+    runs-on: [ubuntu-20.04]
+    steps:
       - name: Run tests
         run: |
           export START_PWD=$PWD

@@ -76,3 +76,10 @@ jobs:
         if: always()
         with:
           files: ${{ env.TEST_PROJECT }}/build/reports/*.xml
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test reports
+          path: |
+            ${{ env.TEST_PROJECT }}/build/reports/*.xml
+            ${{ env.TEST_PROJECT }}/report.html

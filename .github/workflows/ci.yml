@@ -66,6 +66,11 @@ jobs:
           export START_PWD=$PWD
           cd $START_PWD/$TEST_PROJECT/
           ant -f $JAR_NAME.xml
+      - name: Upload JAR file
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.JAR_NAME }}.jar
+          path: ${{ env.TEST_PROJECT }}/${{ env.JAR_NAME }}.jar
       - name: Run tests
         run: |
           export START_PWD=$PWD
@@ -76,7 +81,7 @@ jobs:
         if: always()
         with:
           files: ${{ env.TEST_PROJECT }}/build/reports/*.xml
-      - name: Upload artifact
+      - name: Upload test reports
         uses: actions/upload-artifact@v2
         with:
           name: test-reports

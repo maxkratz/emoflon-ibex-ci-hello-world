@@ -1,10 +1,11 @@
-name: Build Eclipse eMoflon
+name: eMoflon CI Hello World
 on:
   push:
-    # Run pipeline for commits on branch 'main' and on 'feature/<stuff>'
+    # Run pipeline for commits on branch 'main', 'feature/<stuff>', and 'hotfix/<stuff>'
     branches:
       - main
       - 'feature/**'
+      - 'hotfix/**'
     # Run pipeline for release tags
     tags:
       - 'v*.*.*'
@@ -17,7 +18,7 @@ env:
   JAR_NAME: helloworld-testrunner
 
 jobs:
-  # hello world CI example
+  # Build Eclipse projects and create a "fat JAR"
   build:
     runs-on: [ubuntu-20.04]
     steps:
@@ -27,7 +28,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '16'
+          java-version: '17'
       - name: Install dependencies
         run: sudo apt-get install -yq grep coreutils wget curl
       - name: Check out repository code
@@ -71,20 +72,41 @@ jobs:
         with:
           name: ${{ env.JAR_NAME }}.jar
           path: ${{ env.TEST_PROJECT }}/${{ env.JAR_NAME }}.jar
+
+  # Download "fat JAR" and run all tests
+  test:
+    needs: [build]
+    runs-on: [ubuntu-20.04]
+    steps:
+      - name: Start message
+        run: echo "Started CI test."
+      - name: Install correct Java version
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - name: Download JAR file
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.JAR_NAME }}.jar
+      # Currently, this workaround is needed for HiPE
+      - name: Extract HiPE network file
+        run: |
+          unzip -o $JAR_NAME.jar "org/emoflon/ci/helloworld/gt/hipe/engine/hipe-network.xmi"
+          rsync -a ./org ./bin
+          rm -rf ./org
       - name: Run tests
         run: |
-          export START_PWD=$PWD
-          cd $START_PWD/$TEST_PROJECT/
           java -jar $JAR_NAME.jar "$PWD/$JAR_NAME.jar"
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: ${{ env.TEST_PROJECT }}/build/reports/*.xml
+          files: build/reports/*.xml
       - name: Upload test reports
         uses: actions/upload-artifact@v2
         with:
           name: test-reports
           path: |
-            ${{ env.TEST_PROJECT }}/build/reports/*.xml
-            ${{ env.TEST_PROJECT }}/report.html
+            build/reports/*.xml
+            report.html

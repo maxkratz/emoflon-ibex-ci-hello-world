@@ -18,7 +18,7 @@ env:
   JAR_NAME: helloworld-testrunner
 
 jobs:
-  # hello world CI example
+  # Build Eclipse projects and create a "fat JAR"
   build:
     runs-on: [ubuntu-20.04]
     steps:
@@ -73,6 +73,7 @@ jobs:
           name: ${{ env.JAR_NAME }}.jar
           path: ${{ env.TEST_PROJECT }}/${{ env.JAR_NAME }}.jar
 
+  # Download "fat JAR" and run all tests
   test:
     needs: [build]
     runs-on: [ubuntu-20.04]
@@ -84,12 +85,11 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17'
-      - name: Install dependencies
-        run: sudo apt-get install -yq grep coreutils wget curl
       - name: Download JAR file
         uses: actions/download-artifact@v2
         with:
           name: ${{ env.JAR_NAME }}.jar
+      # Currently, this workaround is needed for HiPE
       - name: Extract HiPE network file
         run: |
           unzip -o $JAR_NAME.jar "org/emoflon/ci/helloworld/gt/hipe/engine/hipe-network.xmi"

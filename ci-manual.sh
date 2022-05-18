@@ -61,8 +61,6 @@ log "Prepare repository."
 cd repo
 git clone git@github.com:$REPO_GROUP/$REPO_NAME.git
 cd $REPO_NAME
-git checkout feature/add-example-project
-# TODO: ^remove me
 
 # Import into workspace
 log "Import projects into Eclipse workspace."
@@ -85,6 +83,12 @@ xvfb-run --auto-servernum --server-args="-ac" ./eclipse -noSplash -consoleLog -a
 log "Exporting JAR file using ANT."
 cd $START_PWD/repo/$REPO_NAME/$TEST_PROJECT/
 ant -f $JAR_NAME.xml
+
+# Extract HiPE network file
+log "Extract HiPE network file."
+unzip -o $JAR_NAME.jar "org/emoflon/ci/helloworld/gt/hipe/engine/hipe-network.xmi"
+rsync -a ./org ./bin
+rm -rf ./org
 
 # Run tests
 log "Running tests from JAR file."

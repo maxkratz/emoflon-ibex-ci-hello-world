@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '16'
+          java-version: '17'
       - name: Install dependencies
         run: sudo apt-get install -yq grep coreutils wget curl
       - name: Check out repository code

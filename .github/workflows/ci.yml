@@ -89,7 +89,7 @@ jobs:
       - name: Download JAR file
         uses: actions/download-artifact@v2
         with:
-          name: $JAR_NAME
+          name: ${{ env.JAR_NAME }}.jar
       - name: Extract HiPE network file
         run: |
           unzip -o $JAR_NAME.jar "org/emoflon/ci/helloworld/gt/hipe/engine/hipe-network.xmi"

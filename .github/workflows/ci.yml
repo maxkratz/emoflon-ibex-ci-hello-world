@@ -25,14 +25,14 @@ jobs:
       - name: Start message
         run: echo "Started CI build."
       - name: Install correct Java version
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: '17'
       - name: Install dependencies
         run: sudo apt-get install -yq grep coreutils wget curl
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Get Eclipse archive
         uses: dsaltares/fetch-gh-release-asset@master
         with:
@@ -68,7 +68,7 @@ jobs:
           cd $START_PWD/$TEST_PROJECT/
           ant -f $JAR_NAME.xml
       - name: Upload JAR file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ env.JAR_NAME }}.jar
           path: ${{ env.TEST_PROJECT }}/${{ env.JAR_NAME }}.jar
@@ -81,12 +81,12 @@ jobs:
       - name: Start message
         run: echo "Started CI test."
       - name: Install correct Java version
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: '17'
       - name: Download JAR file
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: ${{ env.JAR_NAME }}.jar
       # Currently, this workaround is needed for HiPE
@@ -99,12 +99,12 @@ jobs:
         run: |
           java -jar $JAR_NAME.jar "$PWD/$JAR_NAME.jar"
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
           files: build/reports/*.xml
       - name: Upload test reports
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test-reports
           path: |

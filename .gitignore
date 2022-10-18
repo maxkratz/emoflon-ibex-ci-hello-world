@@ -13,3 +13,8 @@
 org.emoflon.ci.helloworld.tests/build/
 
 org.emoflon.ci.helloworld.tests/report.html
+
+eclipse-emoflon*.zip
+eclipse/**
+ws/**
+repo/**

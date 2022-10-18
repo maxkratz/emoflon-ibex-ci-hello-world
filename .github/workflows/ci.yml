@@ -102,7 +102,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          files: build/reports/*.xml
+          JUNIT_FILES: build/reports/*.xml
       - name: Upload test reports
         uses: actions/upload-artifact@v3
         with:

@@ -24,7 +24,7 @@ public class WorldGtTest {
 	private GtAPI api;
 
 	@BeforeEach
-	private void setUp() {
+	public void setUp() {
 		matches = new LinkedList<>();
 		world = HelloworldFactory.eINSTANCE.createWorld();
 		api = new HelloworldApp(world).initAPI();
@@ -32,7 +32,7 @@ public class WorldGtTest {
 	}
 
 	@AfterEach
-	private void tearDown() {
+	public void tearDown() {
 		api.terminate();
 		matches.clear();
 		world = null;

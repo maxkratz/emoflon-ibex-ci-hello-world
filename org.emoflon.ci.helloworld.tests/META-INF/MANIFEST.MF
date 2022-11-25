@@ -8,8 +8,7 @@ Automatic-Module-Name: org.emoflon.ci.helloworld.tests
 Require-Bundle: org.emoflon.ci.helloworld,
  org.emoflon.ibex.patternmodel,
  org.emoflon.ibex.gt.democles,
- org.emoflon.ibex.gt.hipe,
- org.emoflon.ibex.gt.viatra
+ org.emoflon.ibex.gt.hipe
 Import-Package: org.emoflon.ci.helloworld.gt,
  org.emoflon.ci.helloworld.gt.api,
  org.emoflon.ci.helloworld.gt.api.matches,

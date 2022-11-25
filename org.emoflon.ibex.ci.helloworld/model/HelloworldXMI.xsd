@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:org.emoflon.ibex.ci.helloworld="platform:/resource/org.emoflon.ibex.ci.helloworld/model/Helloworld.ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="platform:/resource/org.emoflon.ibex.ci.helloworld/model/Helloworld.ecore">
+  <xsd:annotation>
+    <xsd:documentation>TODO: Add documentation for helloworld. Hint: You may copy this element in the Ecore editor to add documentation to EClasses, EOperations, ...</xsd:documentation>
+  </xsd:annotation>
+  <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:complexType name="World">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="countries" type="org.emoflon.ibex.ci.helloworld:Country"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="counter" type="xsd:int" use="required"/>
+    <xsd:attribute name="countries" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="World" type="org.emoflon.ibex.ci.helloworld:World"/>
+  <xsd:complexType name="Country">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+    <xsd:attribute name="population" type="xsd:int" use="required"/>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+  </xsd:complexType>
+  <xsd:element name="Country" type="org.emoflon.ibex.ci.helloworld:Country"/>
+</xsd:schema>

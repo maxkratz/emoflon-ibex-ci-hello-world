@@ -12,7 +12,7 @@ set -e
 START_PWD=$PWD
 REPO_NAME=emoflon-ibex-ci-hello-world
 REPO_GROUP=maxkratz
-TEST_PROJECT=org.emoflon.ci.helloworld.tests
+TEST_PROJECT=org.emoflon.ibex.ci.helloworld.tests
 JAR_NAME=helloworld-testrunner
 
 #
@@ -86,7 +86,7 @@ ant -f $JAR_NAME.xml
 
 # Extract HiPE network file
 log "Extract HiPE network file."
-unzip -o $JAR_NAME.jar "org/emoflon/ci/helloworld/gt/hipe/engine/hipe-network.xmi"
+unzip -o $JAR_NAME.jar "org/emoflon/ibex/ci/helloworld/gt/hipe/engine/hipe-network.xmi"
 rsync -a ./org ./bin
 rm -rf ./org
 

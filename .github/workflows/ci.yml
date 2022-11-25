@@ -1,4 +1,4 @@
-name: eMoflon CI Hello World
+name: eMoflon::IBeX CI Hello World
 on:
   push:
     # Run pipeline for commits on branch 'main', 'feature/<stuff>', and 'hotfix/<stuff>'
@@ -12,7 +12,7 @@ on:
 
 env:
   ECLIPSE_ARCHIVE: eclipse-emoflon-linux-user-ci
-  ECLIPSE_REPO: eMoflon/emoflon-eclipse-build
+  ECLIPSE_REPO: eMoflon/emoflon-ibex-eclipse-build
   ECLIPSE_TAG: latest
   TEST_PROJECT: org.emoflon.ci.helloworld.tests
   JAR_NAME: helloworld-testrunner

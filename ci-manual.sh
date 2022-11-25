@@ -10,7 +10,7 @@ ECLIPSE_ARCHIVE=eclipse-emoflon-linux-user-ci
 
 set -e
 START_PWD=$PWD
-REPO_NAME=emoflon-ci-hello-world
+REPO_NAME=emoflon-ibex-ci-hello-world
 REPO_GROUP=maxkratz
 TEST_PROJECT=org.emoflon.ci.helloworld.tests
 JAR_NAME=helloworld-testrunner
@@ -46,7 +46,7 @@ cleanup
 # Get eclipse
 if [[ ! -f "./$ECLIPSE_ARCHIVE.zip" ]]; then
 	log "Downloading latest eMoflon Eclipse archive from GitHub."
-	curl -s https://api.github.com/repos/eMoflon/emoflon-eclipse-build/releases/latest \
+	curl -s https://api.github.com/repos/eMoflon/emoflon-ibex-eclipse-build/releases/latest \
         | grep "$ECLIPSE_ARCHIVE.*zip" \
         | cut -d : -f 2,3 \
         | tr -d \" \

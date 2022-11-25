@@ -1,4 +1,4 @@
-name: eMoflon CI Hello World
+name: eMoflon::IBeX CI Hello World
 on:
   push:
     # Run pipeline for commits on branch 'main', 'feature/<stuff>', and 'hotfix/<stuff>'
@@ -12,9 +12,9 @@ on:
 
 env:
   ECLIPSE_ARCHIVE: eclipse-emoflon-linux-user-ci
-  ECLIPSE_REPO: eMoflon/emoflon-eclipse-build
+  ECLIPSE_REPO: eMoflon/emoflon-ibex-eclipse-build
   ECLIPSE_TAG: latest
-  TEST_PROJECT: org.emoflon.ci.helloworld.tests
+  TEST_PROJECT: org.emoflon.ibex.ci.helloworld.tests
   JAR_NAME: helloworld-testrunner
 
 jobs:
@@ -92,7 +92,7 @@ jobs:
       # Currently, this workaround is needed for HiPE
       - name: Extract HiPE network file
         run: |
-          unzip -o $JAR_NAME.jar "org/emoflon/ci/helloworld/gt/hipe/engine/hipe-network.xmi"
+          unzip -o $JAR_NAME.jar "org/emoflon/ibex/ci/helloworld/gt/hipe/engine/hipe-network.xmi"
           rsync -a ./org ./bin
           rm -rf ./org
       - name: Run tests

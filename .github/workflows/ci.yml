@@ -43,7 +43,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Unzip Eclipse from archive
         run: unzip -qq -o $ECLIPSE_ARCHIVE.zip
-      # Import projects into Eclipse workspace        
+      # Import projects into Eclipse workspace
       - name: Setup Eclipse workspace
         run: |
           export START_PWD=$PWD

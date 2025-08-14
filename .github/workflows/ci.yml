@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
-          java-version: '17'
+          java-version: '21'
       - name: Install dependencies
         run: sudo apt-get install -yq grep coreutils wget curl
       - name: Check out repository code
@@ -43,7 +43,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Unzip Eclipse from archive
         run: unzip -qq -o $ECLIPSE_ARCHIVE.zip
-      # Import projects into Eclipse workspace        
+      # Import projects into Eclipse workspace
       - name: Setup Eclipse workspace
         run: |
           export START_PWD=$PWD
@@ -84,7 +84,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
-          java-version: '17'
+          java-version: '21'
       - name: Download JAR file
         uses: actions/download-artifact@v4
         with:

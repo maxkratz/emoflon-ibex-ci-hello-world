@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install -yq grep coreutils wget curl
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Get Eclipse archive
         uses: dsaltares/fetch-gh-release-asset@master
         with:

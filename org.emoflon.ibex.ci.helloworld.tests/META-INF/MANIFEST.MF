@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tests
 Bundle-SymbolicName: org.emoflon.ibex.ci.helloworld.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-16
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: org.emoflon.ibex.ci.helloworld.tests
 Require-Bundle: org.emoflon.ibex.ci.helloworld,
  org.emoflon.ibex.patternmodel,

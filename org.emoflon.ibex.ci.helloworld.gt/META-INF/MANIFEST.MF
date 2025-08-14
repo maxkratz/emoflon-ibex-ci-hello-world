@@ -4,11 +4,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.emoflon.ibex.ci.helloworld.gt
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: org.emoflon.ibex.ci.helloworld.gt; singleton:=tru
- e
+Bundle-SymbolicName: org.emoflon.ibex.ci.helloworld.gt; singleton:=true
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.log4j,org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: JavaSE-16
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.emoflon.ibex.ci.helloworld.gt,
  org.emoflon.ibex.ci.helloworld.gt.api,
  org.emoflon.ibex.ci.helloworld.gt.api.matches,
@@ -19,3 +19,4 @@ Require-Bundle: org.emoflon.ibex.ci.helloworld;bundle-version="0.0.1",
  org.emoflon.ibex.gt.democles;bundle-version="1.0.0",
  org.emoflon.ibex.common,
  org.emoflon.ibex.patternmodel
+

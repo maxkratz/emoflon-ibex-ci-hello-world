@@ -25,7 +25,7 @@ jobs:
       - name: Start message
         run: echo "Started CI build."
       - name: Install correct Java version
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'adopt'
           java-version: '21'
@@ -81,7 +81,7 @@ jobs:
       - name: Start message
         run: echo "Started CI test."
       - name: Install correct Java version
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'adopt'
           java-version: '21'

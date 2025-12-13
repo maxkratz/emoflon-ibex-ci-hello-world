@@ -68,7 +68,7 @@ jobs:
           cd $START_PWD/$TEST_PROJECT/
           ant -f $JAR_NAME.xml
       - name: Upload JAR file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ env.JAR_NAME }}.jar
           path: ${{ env.TEST_PROJECT }}/${{ env.JAR_NAME }}.jar
@@ -86,7 +86,7 @@ jobs:
           distribution: 'adopt'
           java-version: '21'
       - name: Download JAR file
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: ${{ env.JAR_NAME }}.jar
       # Currently, this workaround is needed for HiPE
@@ -104,7 +104,7 @@ jobs:
         with:
           JUNIT_FILES: build/reports/*.xml
       - name: Upload test reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: test-reports
           path: |

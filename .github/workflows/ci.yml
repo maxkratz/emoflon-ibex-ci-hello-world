@@ -25,9 +25,9 @@ jobs:
       - name: Start message
         run: echo "Started CI build."
       - name: Install correct Java version
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: '21'
       - name: Install dependencies
         run: sudo apt-get install -yq grep coreutils wget curl
@@ -81,9 +81,9 @@ jobs:
       - name: Start message
         run: echo "Started CI test."
       - name: Install correct Java version
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: '21'
       - name: Download JAR file
         uses: actions/download-artifact@v7

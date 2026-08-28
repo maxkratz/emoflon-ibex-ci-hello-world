@@ -27,7 +27,7 @@ jobs:
       - name: Install correct Java version
         uses: actions/setup-java@v6
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: '21'
       - name: Install dependencies
         run: sudo apt-get install -yq grep coreutils wget curl
@@ -83,7 +83,7 @@ jobs:
       - name: Install correct Java version
         uses: actions/setup-java@v6
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: '21'
       - name: Download JAR file
         uses: actions/download-artifact@v7
